@@ -1,0 +1,23 @@
+/* stylelint-disable */
+.button {
+	&.button--primary {
+		&:hover,
+		&:focus {
+		}
+	}
+
+	&.button--secondary {
+		&:hover,
+		&:focus {
+		}
+	}
+
+	// Disabled
+	&.disabled,
+	&[disabled] {
+		&:hover,
+		&:focus {
+		}
+	}
+}
+/* stylelint-enable */

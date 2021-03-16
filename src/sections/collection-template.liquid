@@ -1,0 +1,20 @@
+{% paginate collection.products by 24 %}
+	<h1>
+		{{- collection.title -}}
+	</h1>
+
+	{% for product in collection.products %}
+		{{ product.title }}
+	{% endfor %}
+
+	{% if paginate.pages > 1 %}
+		{% include 'pagination' %}
+	{% endif %}
+{% endpaginate %}
+
+{% schema %}
+{
+	"name": "Collection pages",
+	"settings": []
+}
+{% endschema %}

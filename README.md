@@ -1,1 +1,0 @@
-# Themeplify-Theme

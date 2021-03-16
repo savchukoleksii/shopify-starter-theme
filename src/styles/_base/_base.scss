@@ -1,0 +1,52 @@
+@import "variables";
+@import "utd-reset";
+@import "fonts";
+@import "typography";
+
+* {
+	outline: none;
+	box-sizing: border-box;
+}
+
+html,
+body {
+	background-color: #fff;
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	background-color: pink;
+}
+
+.content {
+	flex: 1 0 auto;
+}
+
+svg.icon {
+	width: 20px; //  can be remove, when start styling icons
+}
+
+.visually-hidden {
+	position: absolute;
+	clip: rect(0 0 0 0);
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+}
+
+picture {
+	img {
+		filter: blur(0);
+		transition-property: filter;
+		transition-duration: 0.3s;
+	}
+}
+
+.lazy {
+	img {
+		// width: 100%; // may be need remove/rework this solution
+		filter: blur(10px);
+	}
+}
