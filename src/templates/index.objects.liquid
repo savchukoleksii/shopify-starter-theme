@@ -12,7 +12,7 @@
 	{%- endif -%}
 
 	{%- capture item -%}
-		"{{- key -}}": {{ settings[key] | json }}
+		"{{- key -}}": {{- settings[key] | json -}}
 	{%- endcapture -%}
 
 	{%- assign settings_json = settings_json | append: item -%}
@@ -20,19 +20,19 @@
 
 {
 	"shop": {
-		"currency": {{ shop.currency | json }},
-		"money_format": {{ shop.money_format | json }},
-		"money_with_currency_format": {{ shop.money_with_currency_format | json }}
+		"currency": {{- shop.currency | json -}},
+		"money_format": {{- shop.money_format | json -}},
+		"money_with_currency_format": {{- shop.money_with_currency_format | json -}}
 	},
 	"currency": {
-		"cart": {{ cart.currency | json }}
+		"cart": {{- cart.currency | json -}}
 	},
 	"settings": {
 		{{- settings_json -}}
 	},
 	"routes": {
 		"root_url": {{- routes.root_url | json -}},
-		"account_url ": {{- routes.account_url | json  -}},
+		"account_url ": {{- routes.account_url | json -}},
 		"account_login_url": {{- routes.account_login_url | json -}},
 		"account_logout_url": {{- routes.account_logout_url | json -}},
 		"account_register_url": {{- routes.account_register_url | json -}},

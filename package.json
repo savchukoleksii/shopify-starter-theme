@@ -10,6 +10,7 @@
     "yarn": ">=1.0.0"
   },
   "scripts": {
+    "lint:liquid": "themeplify build && theme-check",
     "lint:js": "prettier --write \"./src/scripts/**/*.js\" && eslint \"./src/scripts/**/*.js\" --fix -c .eslintrc || exit 0",
     "scss:lint": "prettier --write \"./src/styles/**/*.scss\" && stylelint --fix --config ./.stylelintrc --syntax scss \"./src/styles/**/*.scss\" || exit 0",
     "sass:lint": "prettier --write \"./src/styles/**/*.sass\" && stylelint --fix --config ./.stylelintrc --syntax sass \"./src/styles/**/*.sass\" || exit 0",
