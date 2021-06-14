@@ -1,68 +1,75 @@
 <!doctype html>
-<html class="no-js" lang="{{ shop.locale }}">
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<meta name="viewport" content="width=device-width,initial-scale=1">
-	<meta name="theme-color" content="{{ settings.color_button }}">
-	<link rel="canonical" href="{{ canonical_url }}">
+<html class="no-js" lang="{{- shop.locale -}}">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<meta name="theme-color" content="{{- settings.color_button -}}">
+		<link rel="canonical" href="{{- canonical_url -}}">
 
-	{%- if settings.favicon != blank -%}
-		<link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png">
-	{%- endif -%}
-
-	{%- capture seo_title -%}
-		{%- if template == 'search' and search.performed == true -%}
-			{{ 'general.search.heading' | t: count: search.results_count }}: {{ 'general.search.results_with_count' | t: terms: search.terms, count: search.results_count }}
-		{%- else -%}
-			{{ page_title }}
+		{%- if settings.favicon != blank -%}
+			<link rel="shortcut icon" href="{{- settings.favicon | img_url: '32x32' -}}" type="image/png">
 		{%- endif -%}
 
-		{%- if current_tags -%}
-			{%- assign meta_tags = current_tags | join: ', ' -%} &ndash; {{ 'general.meta.tags' | t: tags: meta_tags -}}
+		{%- capture seo_title -%}
+			{%- if template == 'search' and search.performed == true -%}
+				{{ 'general.search.heading' | t: count: search.results_count }}: {{ 'general.search.results_with_count' | t: terms: search.terms, count: search.results_count }}
+			{%- else -%}
+				{{ page_title }}
+			{%- endif -%}
+
+			{%- if current_tags -%}
+				{%- assign meta_tags = current_tags | join: ', ' -%} &ndash; {{ 'general.meta.tags' | t: tags: meta_tags -}}
+			{%- endif -%}
+
+			{%- if current_page != 1 -%}
+				&ndash; {{ 'general.meta.page' | t: page: current_page }}
+			{%- endif -%}
+
+		{%- assign escaped_page_title = page_title | escape -%}
+			{%- unless escaped_page_title contains shop.name -%}
+				&ndash; {{ shop.name }}
+			{%- endunless -%}
+		{%- endcapture -%}
+
+		<title>
+			{{- seo_title | strip -}}
+		</title>
+
+		{%- if page_description -%}
+			<meta name="description" content="{{- page_description | escape -}}">
 		{%- endif -%}
 
-		{%- if current_page != 1 -%}
-			&ndash; {{ 'general.meta.page' | t: page: current_page }}
-		{%- endif -%}
+		{%- include 'social-meta-tags' -%}
+		{%- render 'head-theme-meta' with layout: 'theme' -%}
 
-	{%- assign escaped_page_title = page_title | escape -%}
-		{%- unless escaped_page_title contains shop.name -%}
-			&ndash; {{ shop.name }}
-		{%- endunless -%}
+		{%- include 'variables.css' -%}
+		{%- include 'custom-variables.css' -%}
+
+		<link rel="stylesheet" href="{{- 'main.build.min.css' | asset_url -}}">
+
+		{{- content_for_header -}}
+	</head>
+
+	{%- capture body_classes -%}
+		template-{{ template.name }} template-{{ template.name }}{% if template.suffix != blank %}--{{- template.suffix -}}{%- endif -%}
 	{%- endcapture -%}
 
-	<title>
-		{{- seo_title | strip -}}
-	</title>
+	<body class="{{- body_classes -}}">
+		{%- section 'header' -%}
 
-	{%- if page_description -%}
-		<meta name="description" content="{{- page_description | escape -}}">
-	{%- endif -%}
+		<div class="page-container">
+			<main class="main-content" role="main" tabindex="-1">
+				{{- content_for_layout -}}
+			</main>
 
-	{% include 'social-meta-tags' %}
+			{%- section 'footer' -%}
+		</div>
 
-	{%- include 'variables.css' -%}
+		{%- if template.directory == 'customers' -%}
+			<script src="{{ 'shopify_common.js' | shopify_asset_url }}"></script>
+		{%- endif -%}
 
-	<link rel="stylesheet" href="{{ 'main.build.css' | asset_url }}">
-
-	{%- if template.directory == 'customers' -%}
-		<script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer="defer"></script>
-	{%- endif -%}
-
-	{{ content_for_header }}
-</head>
-<body class="template-{{ template | split: '.' | first }}">
-{% section 'header' %}
-
-<div class="page-container">
-	<main class="main-content" role="main" tabindex="-1">
-		{{ content_for_layout }}
-	</main>
-
-	{% section 'footer' %}
-</div>
-
-<script src="{{ 'main.build.min.js' | asset_url }}" defer="defer"></script>
-</body>
+		<script src="{{- 'main.build.min.js' | asset_url -}}"></script>
+	</body>
 </html>
