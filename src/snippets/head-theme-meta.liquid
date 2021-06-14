@@ -1,5 +1,5 @@
 {%- capture template_name -%}
-	{%- if template.directory != blank -%}{{- template.directory -}}{%- endif -%}{{- template.name -}}{%- if template.suffix != blank -%}.{{- template.suffix -}}{%- endif -%}
+	{%- if template.directory != blank -%}{{- template.directory -}}/{%- endif -%}{{- template.name -}}{%- if template.suffix != blank -%}.{{- template.suffix -}}{%- endif -%}
 {%- endcapture -%}
 
 <meta property="theme:layout" content="{{- layout -}}">
