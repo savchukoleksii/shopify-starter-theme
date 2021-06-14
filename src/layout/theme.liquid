@@ -26,15 +26,11 @@
 			&ndash; {{ 'general.meta.page' | t: page: current_page }}
 		{%- endif -%}
 
-	{%- assign escaped_page_title = page_title | escape -%}
-		{%- unless escaped_page_title contains shop.name -%}
-			&ndash; {{ shop.name }}
-		{%- endunless -%}
-	{%- endcapture -%}
+		{%- render 'social-meta-tags' -%}
+		{%- render 'head-theme-meta' with layout: 'theme' -%}
 
-	<title>
-		{{- seo_title | strip -}}
-	</title>
+		{%- render 'variables.css' -%}
+		{%- render 'custom-variables.css' -%}
 
 	{%- if page_description -%}
 		<meta name="description" content="{{- page_description | escape -}}">
@@ -55,14 +51,10 @@
 <body class="template-{{ template | split: '.' | first }}">
 {% section 'header' %}
 
-<div class="page-container">
-	<main class="main-content" role="main" tabindex="-1">
-		{{ content_for_layout }}
-	</main>
+		{%- if template.directory == 'customers' -%}
+			<script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer></script>
+		{%- endif -%}
 
-	{% section 'footer' %}
-</div>
-
-<script src="{{ 'main.build.min.js' | asset_url }}" defer="defer"></script>
-</body>
+		<script src="{{- 'main.build.min.js' | asset_url -}}" defer></script>
+	</body>
 </html>
