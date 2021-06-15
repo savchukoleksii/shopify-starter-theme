@@ -22,7 +22,7 @@ export default {
 	objects: {},
 	async load() {
 		const objects = await axios
-			.get("/?view=global-objects", {
+			.get("/?view=objects", {
 				responseType: "json"
 			})
 			.then((response) => response.data);

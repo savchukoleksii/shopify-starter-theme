@@ -1,5 +1,5 @@
 {
-  "name": "buildify",
+  "name": "themeplify-theme",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -25,7 +25,6 @@
     "download": "themeplify download",
     "zip": "themeplify zip",
     "server": "themeplify server",
-    "themeplify": "themeplify",
     "postinstall": "husky install && yarn copy .husky/**/* .git/hooks"
   },
   "author": "",

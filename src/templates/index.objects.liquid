@@ -46,5 +46,12 @@
 		"cart_clear_url": {{- routes.cart_clear_url | json -}},
 		"product_recommendations_url": {{- routes.product_recommendations_url | json -}},
 		"checkout": "/checkout"
+	},
+	"customer": {{- customer | json -}},
+	"request": {
+		"design_mode": {{- request.design_mode | json -}},
+		"host ": {{- request.host | json -}},
+		"locale": {{- request.locale | json -}},
+		"path": {{- request.path | json -}}
 	}
 }
