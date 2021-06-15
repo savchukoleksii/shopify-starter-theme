@@ -47,6 +47,9 @@ register("product", {
 	},
 	onLoad: async function () {
 		const productHandle = this.container.dataset.productHandle;
+		if (!productHandle) {
+			return;
+		}
 
 		this.product = await this.getProductJson(productHandle);
 
