@@ -8,7 +8,7 @@
 		<link rel="canonical" href="{{- canonical_url -}}">
 
 		{%- if settings.favicon != blank -%}
-			<link rel="shortcut icon" href="{{- settings.favicon | img_url: '32x32' -}}" type="image/png">
+			<link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png">
 		{%- endif -%}
 
 		{%- capture seo_title -%}
@@ -26,7 +26,7 @@
 				&ndash; {{ 'general.meta.page' | t: page: current_page }}
 			{%- endif -%}
 
-		{%- assign escaped_page_title = page_title | escape -%}
+			{%- assign escaped_page_title = page_title | escape -%}
 			{%- unless escaped_page_title contains shop.name -%}
 				&ndash; {{ shop.name }}
 			{%- endunless -%}
@@ -46,28 +46,30 @@
 		{%- render 'variables.css' -%}
 		{%- render 'custom-variables.css' -%}
 
-		<link rel="stylesheet" href="{{- 'main.build.min.css' | asset_url -}}">
+		{%- if page_description -%}
+			<meta name="description" content="{{- page_description | escape -}}">
+		{%- endif -%}
 
-		{{- content_for_header -}}
-	</head>
+		{% include 'social-meta-tags' %}
 
-	{%- capture body_classes -%}
-		template-{{ template.name }} template-{{ template.name }}{% if template.suffix != blank %}--{{- template.suffix -}}{%- endif -%}
-	{%- endcapture -%}
+		{%- include 'variables.css' -%}
 
-	<body class="{{- body_classes -}}">
-		{%- section 'header' -%}
-
-		<div class="page-container">
-			<main class="main-content" role="main" tabindex="-1">
-				{{- content_for_layout -}}
-			</main>
-
-			{%- section 'footer' -%}
-		</div>
+		<link rel="stylesheet" href="{{ 'main.build.css' | asset_url }}">
 
 		{%- if template.directory == 'customers' -%}
-			<script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer></script>
+			<script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer="defer"></script>
+		{%- endif -%}
+
+		{{ content_for_header }}
+	</head>
+
+	<body class="template-{{ template | split: '.' | first }}">
+		{% section 'header' %}
+
+		{{ content_for_layout }}
+
+		{%- if template.directory == 'customers' -%}
+			<script src="{{- 'shopify_common.js' | shopify_asset_url -}}" defer></script>
 		{%- endif -%}
 
 		<script src="{{- 'main.build.min.js' | asset_url -}}" defer></script>
