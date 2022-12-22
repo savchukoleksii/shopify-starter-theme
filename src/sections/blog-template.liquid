@@ -17,7 +17,12 @@
 						</option>
 
 						{% for tag in blog.all_tags %}
-							<option value="/blogs/{{ blog.handle }}/tagged/{{ tag | handleize }}" {% if current_tags contains tag %}selected="selected"{% endif %}>
+							<option
+								value="/blogs/{{ blog.handle }}/tagged/{{ tag | handleize }}"
+								{% if current_tags contains tag %}
+									selected="selected"
+								{% endif %}
+							>
 								{{- tag -}}
 							</option>
 						{% endfor %}
@@ -38,9 +43,7 @@
 
 {% schema %}
 {
-  "name": "Blog pages",
-  "settings": [
-
-  ]
+	"name": "Blog pages",
+	"settings": []
 }
 {% endschema %}

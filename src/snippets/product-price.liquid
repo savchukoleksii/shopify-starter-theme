@@ -12,7 +12,6 @@
 {%- assign money_price = price | money -%}
 
 <dl class="price{% if compare_at_price > price %} price--on-sale{% endif %}" data-price>
-
 	{% if section.settings.show_vendor %}
 		<div class="price__vendor">
 			<dt>

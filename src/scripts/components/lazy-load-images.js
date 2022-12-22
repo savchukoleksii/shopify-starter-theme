@@ -60,7 +60,9 @@
 						lazyImage.srcset = lazyImage.dataset.srcset;
 
 						caches.open("images").then(function (cache) {
-							cache.addAll([lazyImage.dataset.srcset]).then(function () {});
+							cache
+								.addAll([lazyImage.dataset.srcset])
+								.then(function () {});
 						});
 
 						lazyImage.parentElement.classList.remove("lazy");

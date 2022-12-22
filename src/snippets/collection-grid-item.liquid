@@ -7,16 +7,23 @@
 {% endif %}
 
 <div class="collection-grid-item">
-	<a href="{% if collection.products == empty %}#{% else %}{{ collection.url }}{% endif %}" class="collection-grid-item__link">
+	<a
+		href="{% if collection.products == empty %}#{% else %}{{ collection.url }}{% endif %}"
+		class="collection-grid-item__link"
+	>
 		{% unless collection_image == blank %}
-			<div class="collection-grid-item__overlay box ratio-container lazyload js"
+			<div
+				class="collection-grid-item__overlay box ratio-container lazyload js"
 				data-bgset="{% include 'bgset', image: collection_image %}"
 				data-sizes="auto"
 				data-parent-fit="cover"
-				style="background-image: url('{{ collection_image | image_url: width: 300, height: 300 }}')">
-			</div>
+				style="background-image: url('{{ collection_image | image_url: width: 300, height: 300 }}')"
+			></div>
 			<noscript>
-				<div class="collection-grid-item__overlay" style="background-image: url('{{ collection_image | image_url: width: 1024, height: 1024 }}')"></div>
+				<div
+					class="collection-grid-item__overlay"
+					style="background-image: url('{{ collection_image | image_url: width: 1024, height: 1024 }}')"
+				></div>
 			</noscript>
 		{% else %}
 			{% if collection == empty %}
@@ -25,7 +32,10 @@
 					{{ 'collection-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
 				</div>
 			{% else %}
-				<div class="collection-grid-item__overlay" style="background-image: url('{{ collection_image | image_url: width: 1024, height: 1024 }}')"></div>
+				<div
+					class="collection-grid-item__overlay"
+					style="background-image: url('{{ collection_image | image_url: width: 1024, height: 1024 }}')"
+				></div>
 			{% endif %}
 		{% endunless %}
 

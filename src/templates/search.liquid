@@ -1,36 +1,44 @@
 {% paginate search.results by 10 %}
+	<div class="page-width">
+		<div class="text-center {% if search.performed == true %}text-center{% endif %}">
+			{% if search.performed == false %}
+				<h1 class="h2">{{ 'general.search.title' | t }}</h1>
+			{% else %}
+				<h1 class="h2">
+					<span class="visually-hidden">
+						{{- 'general.search.heading' | t: count: search.results_count }}:</span
+					>
+					{{ 'general.search.results_with_count' | t: terms: search.terms, count: search.results_count }}
+				</h1>
+			{% endif %}
 
-<div class="page-width">
-	{% if search.performed == false %}
-		<div class="text-center">
-			<h1 class="h2">{{ 'general.search.title' | t }}</h1>
-	{% else %}
-		<div class="section-header text-center">
-			<h1 class="h2">
-				<span class="visually-hidden">{{ 'general.search.heading' | t: count: search.results_count }}:</span>
-				{{ 'general.search.results_with_count' | t: terms: search.terms, count: search.results_count }}
-			</h1>
-	{% endif %}
 			<div class="grid">
 				<div class="grid__item medium-up--two-fifths medium-up--push-three-tenths">
 					<form action="/search" method="get" role="search" class="search">
-						<div aria-live="polite" class="form-message form-message--error search-result-error-message hide" data-search-error-message>
+						<div
+							aria-live="polite"
+							class="form-message form-message--error search-result-error-message hide"
+							data-search-error-message
+						>
 							<ul id="error-search-form">
 								<li>{{ 'general.search.empty_search_message' | t }}</li>
 							</ul>
 						</div>
 
 						<div class="input-group">
-							<input type="search"
+							<input
+								type="search"
 								id="SearchInput"
 								class="input-group__field search__input"
 								name="q"
 								value="{{ search.terms | escape }}"
 								placeholder="{{ 'general.search.placeholder' | t }}"
 								aria-label="{{ 'general.search.placeholder' | t }}"
-								>
+							>
 							<span class="input-group__btn">
-								<button id="SearchResultSubmit" class="btn search__submit" type="submit">{{ 'general.search.submit' | t }}</button>
+								<button id="SearchResultSubmit" class="btn search__submit" type="submit">
+									{{ 'general.search.submit' | t }}
+								</button>
 							</span>
 						</div>
 					</form>
@@ -38,35 +46,41 @@
 			</div>
 
 			{% if search.performed and search.results_count == 0 %}
-				<hr class="hr--small hr--invisible" aria-hidden="true" />
+				<hr class="hr--small hr--invisible" aria-hidden="true">
 				<div class="rte">
 					<p>{{ 'general.search.no_results_html' | t: terms: search.terms }}</p>
 				</div>
 			{% endif %}
+		</div>
 	</div>
-</div>
 
-
-{% if search.performed %}
-	{% if search.results_count > 0 %}
-		<hr aria-hidden="true" />
-	{% endif %}
-	<h2 class="visually-hidden">{{ 'general.search.heading' | t: count: search.results_count }}</h2>
-	<ul class="page-width list-view-items">
-		{% for item in search.results %}
-			<li class="list-view-item">
+	{% if search.performed %}
+		{% if search.results_count > 0 %}
+			<hr aria-hidden="true">
+		{% endif %}
+		<h2 class="visually-hidden">{{ 'general.search.heading' | t: count: search.results_count }}</h2>
+		<ul class="page-width list-view-items">
+			{% for item in search.results %}
+				<li class="list-view-item">
 					{% if item.object_type == 'product' %}
 						{% include 'product-card-list', product: item %}
 					{% else %}
 						<div class="product-card product-card--list">
 							<a href="{{ item.url }}" class="full-width-link">
-								<span class="visually-hidden">{{ item.title }}</span>
+								<span class="visually-hidden">
+									{{ item.title }}
+								</span>
 							</a>
+
 							<div class="list-view-item__link">
 								{% if item.image %}
 									<div class="list-view-item__image-column">
 										<div class="list-view-item__image-wrapper product-card__image-wrapper">
-											<img class="list-view-item__image" src="{{ item.image.src | image_url: width: 600, height: 600 }}" alt="{{ item.image.alt | escape }}">
+											<img
+												class="list-view-item__image"
+												src="{{ item.image.src | image_url: width: 600, height: 600 }}"
+												alt="{{ item.image.alt | escape }}"
+											>
 										</div>
 									</div>
 								{% endif %}
@@ -75,21 +89,23 @@
 									<div class="list-view-item__title" aria-hidden="true">
 										<span class="product-card__title">{{ item.title }}</span>
 									</div>
+
 									<div>
-										{% if item.published_at %}{{ item.published_at | date: "%b %d, %Y" }} &#8212; {% endif %}
+										{% if item.published_at -%}
+											{{- item.published_at | date: '%b %d, %Y' }} &#8212;
+										{% endif %}
 										{{ item.content | strip_html | truncate: 200 }}
 									</div>
 								</div>
 							</div>
 						</div>
 					{% endif %}
-			</li>
-		{% endfor %}
-	</ul>
+				</li>
+			{% endfor %}
+		</ul>
 
-	{% if paginate.pages > 1 %}
-		{% render 'pagination' %}
+		{% if paginate.pages > 1 %}
+			{% render 'pagination' %}
+		{% endif %}
 	{% endif %}
-{% endif %}
-
 {% endpaginate %}
