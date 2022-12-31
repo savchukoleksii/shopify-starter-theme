@@ -1,40 +1,39 @@
-import $ from "jquery";
+import $ from 'jquery'
 
 /**
  * Gift Card Template Script
  * ------------------------------------------------------------------------------
  * A file that contains scripts highly couple code to the Gift Card template.
  */
-
-(function () {
+;(function () {
 	let config = {
-		qrCode: "#QrCode",
-		printButton: "#PrintGiftCard",
-		giftCardCode: ".giftcard__code"
+		qrCode: '#QrCode',
+		printButton: '#PrintGiftCard',
+		giftCardCode: '.giftcard__code'
 	};
 
 	let $qrCode = $(config.qrCode);
 
 	new window.QRCode($qrCode[0], {
-		text: $qrCode.attr("data-identifier"),
+		text: $qrCode.attr('data-identifier'),
 		width: 120,
 		height: 120
 	});
 
-	$(config.printButton).on("click", function () {
+	$(config.printButton).on('click', function () {
 		window.print();
 	});
 
 	// Auto-select gift card code on click, based on ID passed to the function
 	$(config.giftCardCode).on(
-		"click",
-		{ element: "GiftCardDigits" },
+		'click',
+		{ element: 'GiftCardDigits' },
 		selectText
 	);
 
 	function selectText(evt) {
 		let text = document.getElementById(evt.data.element);
-		let range = "";
+		let range = '';
 
 		if (document.body.createTextRange) {
 			range = document.body.createTextRange();

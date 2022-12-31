@@ -1,5 +1,7 @@
+src/styles/functions/**/*.sass
 src/styles/libs/**/*.sass
 src/styles/vendor/**/*.sass
+src/styles/functions/**/*.scss
 src/styles/libs/**/*.scss
 src/styles/vendor/**/*.scss
 src/styles/libs/**/*.css

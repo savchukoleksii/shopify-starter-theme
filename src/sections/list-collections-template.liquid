@@ -1,5 +1,5 @@
-<div class="page-width">
-	<header class="section-header text-center">
+<div class='page-width'>
+	<header class='section-header text-center'>
 		<h1>
 			{{- page_title -}}
 		</h1>
@@ -20,7 +20,7 @@
 			{%- assign image_size = '225x' -%}
 	{% endcase %}
 
-	<ul class="grid grid--uniform">
+	<ul class='grid grid--uniform'>
 		{% if section.settings.display_type == 'all' %}
 			{% case section.settings.sort %}
 				{% when 'products_high', 'products_low' %}
@@ -33,20 +33,20 @@
 				or section.settings.sort == 'alphabetical'
 			%}
 				{% for collection in collections %}
-					<li class="grid__item {{ grid_item_width }}">
+					<li class='grid__item {{ grid_item_width }}'>
 						{% include 'collection-grid-item', collection_image_size: image_size %}
 					</li>
 				{% endfor %}
 			{% else %}
 				{% for collection in collections reversed %}
-					<li class="grid__item {{ grid_item_width }}">
+					<li class='grid__item {{ grid_item_width }}'>
 						{% include 'collection-grid-item', collection_image_size: image_size %}
 					</li>
 				{% endfor %}
 			{% endif %}
 		{% else %}
 			{% for block in section.blocks %}
-				<li class="grid__item {{ grid_item_width }}">
+				<li class='grid__item {{ grid_item_width }}'>
 					{%- assign collection = collections[block.settings.collection] -%}
 					{% include 'collection-grid-item', collection_image_size: image_size %}
 				</li>

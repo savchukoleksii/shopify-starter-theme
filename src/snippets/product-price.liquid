@@ -11,11 +11,11 @@
 
 {%- assign money_price = price | money -%}
 
-<dl class="price{% if compare_at_price > price %} price--on-sale{% endif %}" data-price>
+<dl class='price{% if compare_at_price > price %} price--on-sale{% endif %}' data-price>
 	{% if section.settings.show_vendor %}
-		<div class="price__vendor">
+		<div class='price__vendor'>
 			<dt>
-				<span class="visually-hidden">{{ 'products.product.vendor' | t }}</span>
+				<span class='visually-hidden'>{{ 'products.product.vendor' | t }}</span>
 			</dt>
 			<dd>
 				{{ product.vendor }}
@@ -23,12 +23,12 @@
 		</div>
 	{% endif %}
 
-	<div class="price__regular">
+	<div class='price__regular'>
 		<dt>
-			<span class="visually-hidden visually-hidden--inline">{{ 'products.product.regular_price' | t }}</span>
+			<span class='visually-hidden visually-hidden--inline'>{{ 'products.product.regular_price' | t }}</span>
 		</dt>
 		<dd>
-			<span class="price-item price-item--regular" data-regular-price>
+			<span class='price-item price-item--regular' data-regular-price>
 				{% if available %}
 					{% if compare_at_price > price %}
 						{{ compare_at_price | money }}
@@ -41,15 +41,15 @@
 			</span>
 		</dd>
 	</div>
-	<div class="price__sale">
+	<div class='price__sale'>
 		<dt>
-			<span class="visually-hidden visually-hidden--inline">{{ 'products.product.sale_price' | t }}</span>
+			<span class='visually-hidden visually-hidden--inline'>{{ 'products.product.sale_price' | t }}</span>
 		</dt>
 		<dd>
-			<span class="price-item price-item--sale" data-sale-price>
+			<span class='price-item price-item--sale' data-sale-price>
 				{{ money_price }}
 			</span>
-			<span class="price-item__label" aria-hidden="true">{{ 'products.product.on_sale' | t }}</span>
+			<span class='price-item__label' aria-hidden='true'>{{ 'products.product.on_sale' | t }}</span>
 		</dd>
 	</div>
 </dl>

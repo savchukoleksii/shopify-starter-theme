@@ -1,5 +1,7 @@
-@function str-replace($string, $search, $replace: "") {
-	$index: str-index($string, $search);
+@use 'sass:string';
+
+@function str-replace($string, $search, $replace: '') {
+	$index: string.index($string, $search);
 
 	@if $index {
 		@return str-slice($string, 1, $index - 1) + $replace +
@@ -13,8 +15,8 @@
 	@return $string;
 }
 
-@function replace($string, $search, $replace: "") {
-	$index: str-index($string, $search);
+@function replace($string, $search, $replace: '') {
+	$index: string.index($string, $search);
 
 	@if $index {
 		@return str-slice($string, 1, $index - 1) + $replace +
@@ -29,10 +31,10 @@
 }
 
 @function settings($setting, $default: false) {
-	$characters: "_", ".";
+	$characters: '_', '.';
 
 	@each $character in $characters {
-		$setting: replace($setting, $character, "-");
+		$setting: replace($setting, $character, '-');
 	}
 
 	@if $default {

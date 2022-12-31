@@ -15,7 +15,11 @@
 			"experimentalObjectRestSpread": true
 		}
 	},
-	"extends": "eslint:recommended",
+	"extends": [
+		"eslint:recommended",
+		"plugin:vue/vue3-recommended",
+		"prettier"
+	],
 	"rules": {
 		"semi": 2,
 		"camelcase": 0,

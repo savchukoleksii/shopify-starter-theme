@@ -3,10 +3,10 @@
 	label {
 	}
 
-	input[type="radio"] {
+	input[type='radio'] {
 	}
 
-	input[type="radio"]:checked {
+	input[type='radio']:checked {
 		+ label {
 		}
 	}

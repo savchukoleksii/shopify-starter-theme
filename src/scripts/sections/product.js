@@ -6,38 +6,38 @@
  * @namespace product
  */
 
-import { register } from "@shopify/theme-sections";
-import { formatMoney } from "@shopify/theme-currency";
+import { register } from '@shopify/theme-sections';
+import { formatMoney } from '@shopify/theme-currency';
 import {
 	ProductForm,
 	getUrlWithVariant
-} from "@savchukoleksii/shopify-product-form";
-import { addToCartSubmit } from "../core/helpers/addToCartSubmit";
-import translations from "@savchukoleksii/shopify-theme-translations-tool";
+} from '@savchukoleksii/shopify-product-form';
+import { addToCartSubmit } from '../core/helpers/addToCartSubmit';
+import translations from '@savchukoleksii/shopify-theme-translations-tool';
 
 const selectors = {
-	addToCartButton: "[data-add-to-cart]",
-	addToCartButtonText: "[data-add-to-cart-text]",
-	productPrice: "[data-product-price]",
-	comparePrice: "[data-compare-price]",
-	productForm: "[data-product-form]",
-	productSlider: "[data-product-slider]",
-	thumbnailsSlider: "[data-product-thumbnails]",
-	productSku: "[data-product-sku]",
-	productSkuValue: "[data-product-sku-value]",
-	quantityInput: ".js-quantity-input",
-	quantityButton: ".js-quantity-button",
-	quantityIncrement: "[data-quantity-increment]",
-	quantityDecrement: "[data-quantity-decrement]",
-	inventoriesJson: "[data-inventories-json]"
+	addToCartButton: '[data-add-to-cart]',
+	addToCartButtonText: '[data-add-to-cart-text]',
+	productPrice: '[data-product-price]',
+	comparePrice: '[data-compare-price]',
+	productForm: '[data-product-form]',
+	productSlider: '[data-product-slider]',
+	thumbnailsSlider: '[data-product-thumbnails]',
+	productSku: '[data-product-sku]',
+	productSkuValue: '[data-product-sku-value]',
+	quantityInput: '.js-quantity-input',
+	quantityButton: '.js-quantity-button',
+	quantityIncrement: '[data-quantity-increment]',
+	quantityDecrement: '[data-quantity-decrement]',
+	inventoriesJson: '[data-inventories-json]'
 };
 
 const classes = {
-	hidden: "hidden",
-	notInitialized: "not-initialized"
+	hidden: 'hidden',
+	notInitialized: 'not-initialized'
 };
 
-register("product", {
+register('product', {
 	product: {},
 	inventories: {},
 	productForm: null,
@@ -86,7 +86,7 @@ register("product", {
 		this.initEvents();
 	},
 	initEvents: function () {
-		this.container.addEventListener("click", this.onQuantityChange);
+		this.container.addEventListener('click', this.onQuantityChange);
 	},
 	getProductJson: function (handle) {
 		const url = `/products/${handle}.js`;
@@ -123,13 +123,10 @@ register("product", {
 		}
 
 		if (variant.compare_at_price > variant.price) {
-			comparePrice.innerText = formatMoney(
-				variant.compare_at_price,
-				null
-			);
+			comparePrice.innerText = formatMoney(variant.compare_at_price, null);
 			comparePrice.classList.remove(classes.hidden);
 		} else {
-			comparePrice.innerText = "";
+			comparePrice.innerText = '';
 			comparePrice.classList.add(classes.hidden);
 		}
 	},
@@ -147,7 +144,7 @@ register("product", {
 		if (!variant) {
 			button.disabled = false;
 			buttonText.innerText = translations.get(
-				"products.product.unavailable"
+				'products.product.unavailable'
 			);
 		}
 
@@ -156,13 +153,11 @@ register("product", {
 		if (available) {
 			button.disabled = false;
 			buttonText.innerText = translations.get(
-				"products.product.add_to_cart"
+				'products.product.add_to_cart'
 			);
 		} else {
 			button.disabled = true;
-			buttonText.innerText = translations.get(
-				"products.product.sold_out"
-			);
+			buttonText.innerText = translations.get('products.product.sold_out');
 		}
 	},
 	updateSku: function (variant) {
@@ -172,9 +167,7 @@ register("product", {
 
 		const sku = this.container.querySelector(selectors.productSku);
 
-		const skuValue = this.container.querySelector(
-			selectors.productSkuValue
-		);
+		const skuValue = this.container.querySelector(selectors.productSkuValue);
 
 		if (!sku || !skuValue) {
 			return null;
@@ -184,7 +177,7 @@ register("product", {
 			skuValue.innerHTML = variant.sku;
 			sku.classList.remove(classes.hidden);
 		} else {
-			skuValue.innerHTML = "";
+			skuValue.innerHTML = '';
 			sku.classList.add(classes.hidden);
 		}
 	},
@@ -224,7 +217,7 @@ register("product", {
 
 		const url = getUrlWithVariant(window.location.href, variant.id);
 
-		window.history.replaceState({ path: url }, "", url);
+		window.history.replaceState({ path: url }, '', url);
 	},
 	onQuantityChange: function (event) {
 		const input = this.container.querySelector(selectors.quantityInput);
@@ -246,10 +239,8 @@ register("product", {
 		const valueBefore = +input.value;
 		const valueAfter = valueBefore + changeValue;
 
-		const canIncrement =
-			isIncrement && valueAfter <= this.quantityLimit.max;
-		const canDecrement =
-			isDecrement && valueAfter >= this.quantityLimit.min;
+		const canIncrement = isIncrement && valueAfter <= this.quantityLimit.max;
+		const canDecrement = isDecrement && valueAfter >= this.quantityLimit.min;
 
 		if (canIncrement || canDecrement) {
 			input.value = valueAfter;

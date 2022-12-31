@@ -1,41 +1,48 @@
 const { VueLoaderPlugin } 				= require('vue-loader');
 const TerserPlugin 						= require("terser-webpack-plugin");
 const BundleAnalyzerPlugin 				= require('webpack-bundle-analyzer')['BundleAnalyzerPlugin'];
+const MiniCssExtractPlugin 				= require("mini-css-extract-plugin");
+const path								= require("path");
 
 module.exports = {
 	webpack: function (config) {
 		return {
 			...config,
 			optimization: {
-				...(config.optimization || {}),
-				splitChunks: {
-					chunks: 'async',
-					minSize: 20000,
-					minRemainingSize: 0,
-					minChunks: 1,
-					maxAsyncRequests: 30,
-					maxInitialRequests: 30,
-					enforceSizeThreshold: 50000,
-					cacheGroups: {
-						defaultVendors: {
-							test: /[\\/]node_modules[\\/]/,
-							priority: -10,
-							reuseExistingChunk: true
-						},
-						default: {
-							minChunks: 2,
-							priority: -20,
-							reuseExistingChunk: true
-						}
-					}
-				},
 				minimize: true,
 				minimizer: [
-					new TerserPlugin()
+					new TerserPlugin({
+						parallel: true,
+						terserOptions: {
+							format: {
+								comments: false
+							}
+						},
+						extractComments: false
+					})
 				]
 			},
 			module: {
 				rules: [
+					{
+						test: /\.(scss|sass|css)$/i,
+						use: [
+							process.env.NODE_ENV !== 'production' ? "vue-style-loader" : {
+								loader: MiniCssExtractPlugin.loader,
+								options: {
+									publicPath: path.resolve(__dirname, "dist/assets")
+								}
+							},
+							"css-loader",
+							{
+								loader: "sass-loader",
+								options: {
+									// Prefer `dart-sass`
+									implementation: require("sass")
+								}
+							}
+						]
+					},
 					{
 						test: /\.svg$/,
 						use: [
@@ -46,7 +53,10 @@ module.exports = {
 					{
 						test: /\.vue$/,
 						use: {
-							loader: 'vue-loader'
+							loader: 'vue-loader',
+							options: {
+								extractCSS: true
+							}
 						}
 					},
 					...config.module.rules
@@ -67,7 +77,10 @@ module.exports = {
 				new VueLoaderPlugin(),
 				...(process.env.BUNDLE_ANALIZER ? [
 					new BundleAnalyzerPlugin()
-				] : [])
+				] : []),
+				new MiniCssExtractPlugin({
+					filename: `webpack.extract.build.css`
+				})
 			]
 		};
 	},

@@ -1,26 +1,26 @@
 {% paginate blog.articles by 12 %}
-	<div class="page-width">
-		<header class="section-header text-center">
+	<div class='page-width'>
+		<header class='section-header text-center'>
 			<h1>
 				{{- page_title -}}
 			</h1>
 
 			{% if blog.tags.size > 0 %}
-				<div class="blog-filter">
-					<label class="blog-filter__label select-label" for="BlogTagFilter">
+				<div class='blog-filter'>
+					<label class='blog-filter__label select-label' for='BlogTagFilter'>
 						{{- 'collections.filters.title_tags' | t -}}
 					</label>
 
-					<select id="BlogTagFilter">
-						<option value="/blogs/{{ blog.handle }}">
+					<select id='BlogTagFilter'>
+						<option value='/blogs/{{ blog.handle }}'>
 							{{- 'blogs.article.all_topics' | t -}}
 						</option>
 
 						{% for tag in blog.all_tags %}
 							<option
-								value="/blogs/{{ blog.handle }}/tagged/{{ tag | handleize }}"
+								value='/blogs/{{ blog.handle }}/tagged/{{ tag | handleize }}'
 								{% if current_tags contains tag %}
-									selected="selected"
+									selected='selected'
 								{% endif %}
 							>
 								{{- tag -}}

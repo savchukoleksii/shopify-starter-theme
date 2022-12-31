@@ -1,12 +1,12 @@
-import axios from "axios";
+import axios from 'axios';
 
 export default {
 	loaded: false,
 	settings: {},
 	async load() {
 		const settings = await axios
-			.get("/?view=settings", {
-				responseType: "json"
+			.get('/?view=settings', {
+				responseType: 'json'
 			})
 			.then((response) => response.data);
 
@@ -14,7 +14,7 @@ export default {
 		this.settings = settings;
 
 		document.dispatchEvent(
-			new CustomEvent("theme:settings:loaded", {
+			new CustomEvent('theme:settings:loaded', {
 				detail: {
 					settings
 				}

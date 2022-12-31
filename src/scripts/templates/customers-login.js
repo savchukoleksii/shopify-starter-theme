@@ -1,4 +1,4 @@
-import $ from "jquery";
+import $ from 'jquery';
 
 /**
  * Password Template Script
@@ -10,8 +10,8 @@ import $ from "jquery";
 
 window.theme.customerLogin = (function () {
 	let config = {
-		recoverPasswordForm: "#RecoverPassword",
-		hideRecoverPasswordLink: "#HideRecoverPasswordLink"
+		recoverPasswordForm: '#RecoverPassword',
+		hideRecoverPasswordLink: '#HideRecoverPasswordLink'
 	};
 
 	if (!$(config.recoverPasswordForm).length) {
@@ -21,8 +21,8 @@ window.theme.customerLogin = (function () {
 	checkUrlHash();
 	resetPasswordSuccess();
 
-	$(config.recoverPasswordForm).on("click", onShowHidePasswordForm);
-	$(config.hideRecoverPasswordLink).on("click", onShowHidePasswordForm);
+	$(config.recoverPasswordForm).on('click', onShowHidePasswordForm);
+	$(config.hideRecoverPasswordLink).on('click', onShowHidePasswordForm);
 
 	function onShowHidePasswordForm(evt) {
 		evt.preventDefault();
@@ -33,7 +33,7 @@ window.theme.customerLogin = (function () {
 		let hash = window.location.hash;
 
 		// Allow deep linking to recover password form
-		if (hash === "#recover") {
+		if (hash === '#recover') {
 			toggleRecoverPasswordForm();
 		}
 	}
@@ -42,15 +42,15 @@ window.theme.customerLogin = (function () {
 	 *  Show/Hide recover password form
 	 */
 	function toggleRecoverPasswordForm() {
-		$("#RecoverPasswordForm").toggleClass("hide");
-		$("#CustomerLoginForm").toggleClass("hide");
+		$('#RecoverPasswordForm').toggleClass('hide');
+		$('#CustomerLoginForm').toggleClass('hide');
 	}
 
 	/**
 	 *  Show reset password success message
 	 */
 	function resetPasswordSuccess() {
-		let $formState = $(".reset-password-success");
+		let $formState = $('.reset-password-success');
 
 		// check if reset password form was successfully submited.
 		if (!$formState.length) {
@@ -58,6 +58,6 @@ window.theme.customerLogin = (function () {
 		}
 
 		// show success message
-		$("#ResetSuccess").removeClass("hide");
+		$('#ResetSuccess').removeClass('hide');
 	}
 })();

@@ -1,4 +1,4 @@
-import serialize from "form-serialize";
+import serialize from 'form-serialize';
 
 export function addToCartSubmit(event) {
 	event.preventDefault();
@@ -16,19 +16,19 @@ export function addToCartSubmit(event) {
 		return;
 	}
 
-	form.classList.add("adding");
+	form.classList.add('adding');
 
 	document.dispatchEvent(
-		new CustomEvent("product:add", {
+		new CustomEvent('product:add', {
 			detail: {
 				items: [formData],
 				callback: () => {
 					setTimeout(() => {
-						form.classList.remove("adding");
+						form.classList.remove('adding');
 					}, 500);
 				},
 				errorCallback: () => {
-					form.classList.remove("adding");
+					form.classList.remove('adding');
 				}
 			}
 		})

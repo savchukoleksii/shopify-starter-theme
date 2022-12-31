@@ -11,9 +11,9 @@
 	{%- assign number_of_comments = article.comments_count -%}
 {%- endif -%}
 
-<article class="page-width">
-	<div class="grid">
-		<div class="grid__item medium-up--five-sixths medium-up--push-one-twelfth">
+<article class='page-width'>
+	<div class='grid'>
+		<div class='grid__item medium-up--five-sixths medium-up--push-one-twelfth'>
 			{% section 'article-template' %}
 		</div>
 	</div>
@@ -21,29 +21,29 @@
 
 {% if blog.comments_enabled? %}
 	{% if number_of_comments > 0 %}
-		<hr aria-hidden="true">
-		<div class="page-width">
-			<div class="grid">
-				<div class="grid__item medium-up--five-sixths medium-up--push-one-twelfth">
-					<h2 class="h3">{{ 'blogs.comments.comments_with_count' | t: count: number_of_comments }}</h2>
+		<hr aria-hidden='true'>
+		<div class='page-width'>
+			<div class='grid'>
+				<div class='grid__item medium-up--five-sixths medium-up--push-one-twelfth'>
+					<h2 class='h3'>{{ 'blogs.comments.comments_with_count' | t: count: number_of_comments }}</h2>
 
 					{% paginate article.comments by 5 %}
 						{% comment %}
 							#comments is required, it is used as an anchor link by Shopify.
 						{% endcomment %}
-						<div id="comments">
-							<ul class="comments">
+						<div id='comments'>
+							<ul class='comments'>
 								{% comment %}
 									If a comment was just submitted with no blank field, show it.
 								{% endcomment %}
 								{% if comment.status == 'pending' %}
-									<li id="{{ comment.id }}" class="comment">
+									<li id='{{ comment.id }}' class='comment'>
 										{% include 'comment' %}
 									</li>
 								{% endif %}
 
 								{% for comment in article.comments %}
-									<li id="{{ comment.id }}" class="comment">
+									<li id='{{ comment.id }}' class='comment'>
 										{% include 'comment' %}
 									</li>
 								{% endfor %}
@@ -59,15 +59,15 @@
 		</div>
 	{% endif %}
 
-	<hr aria-hidden="true">
-	<div class="page-width">
-		<div class="grid">
-			<div class="grid__item medium-up--five-sixths medium-up--push-one-twelfth">
-				<div class="comment-form form-vertical">
+	<hr aria-hidden='true'>
+	<div class='page-width'>
+		<div class='grid'>
+			<div class='grid__item medium-up--five-sixths medium-up--push-one-twelfth'>
+				<div class='comment-form form-vertical'>
 					{% form 'new_comment', article %}
 						{%- assign formId = 'CommentForm' -%}
 
-						<h2 class="h3">{{ 'blogs.comments.title' | t }}</h2>
+						<h2 class='h3'>{{ 'blogs.comments.title' | t }}</h2>
 
 						{%- assign post_message = 'blogs.comments.success' -%}
 						{%- if blog.moderated? and comment.status == 'pending' -%}
@@ -78,58 +78,58 @@
 
 						{% include 'form-status', form_id: formId, success_message: post_message %}
 
-						<div class="grid">
-							<div class="grid__item medium-up--one-half">
-								<label for="{{ formId }}-author">{{ 'blogs.comments.name' | t }}</label>
+						<div class='grid'>
+							<div class='grid__item medium-up--one-half'>
+								<label for='{{ formId }}-author'>{{ 'blogs.comments.name' | t }}</label>
 								<input
-									type="text"
-									name="comment[author]"
-									id="{{ formId }}-author"
-									class="input-full{% if form.errors contains 'author' %} input--error{% endif %}"
-									value="{{ form.author }}"
+									type='text'
+									name='comment[author]'
+									id='{{ formId }}-author'
+									class='input-full{% if form.errors contains 'author' %} input--error{% endif %}'
+									value='{{ form.author }}'
 									{% if form.errors contains 'author' %}
-										aria-invalid="true" aria-describedby="{{ formId }}-author-error"
+										aria-invalid='true' aria-describedby='{{ formId }}-author-error'
 									{% endif %}
 								>
-								<span id="{{ formId }}-author-error" class="input-error-message">
+								<span id='{{ formId }}-author-error' class='input-error-message'>
 									{%- include 'icon-error' %}
 									{{ 'blogs.comments.name' | t }}
 									{{ form.errors.messages.author }}.</span
 								>
 							</div>
 
-							<div class="grid__item medium-up--one-half">
-								<label for="{{ formId }}-email">{{ 'blogs.comments.email' | t }}</label>
+							<div class='grid__item medium-up--one-half'>
+								<label for='{{ formId }}-email'>{{ 'blogs.comments.email' | t }}</label>
 								<input
-									type="email"
-									name="comment[email]"
-									id="{{ formId }}-email"
-									class="input-full{% if form.errors contains 'email' %} input--error{% endif %}"
-									value="{{ form.email }}"
-									autocorrect="off"
-									autocapitalize="off"
+									type='email'
+									name='comment[email]'
+									id='{{ formId }}-email'
+									class='input-full{% if form.errors contains 'email' %} input--error{% endif %}'
+									value='{{ form.email }}'
+									autocorrect='off'
+									autocapitalize='off'
 									{% if form.errors contains 'email' %}
-										aria-invalid="true" aria-describedby="{{ formId }}-email-error"
+										aria-invalid='true' aria-describedby='{{ formId }}-email-error'
 									{% endif %}
 								>
-								<span id="{{ formId }}-email-error" class="input-error-message">
+								<span id='{{ formId }}-email-error' class='input-error-message'>
 									{%- include 'icon-error' %}
 									{{ form.errors.translated_fields.email | capitalize }}
 									{{ form.errors.messages.email }}.</span
 								>
 							</div>
 
-							<div class="grid__item">
-								<label for="{{ formId }}-body">{{ 'blogs.comments.message' | t }}</label>
+							<div class='grid__item'>
+								<label for='{{ formId }}-body'>{{ 'blogs.comments.message' | t }}</label>
 								<textarea
-									name="comment[body]"
-									id="{{ formId }}-body"
-									class="input-full{% if form.errors contains 'body' %} input--error{% endif %}"
+									name='comment[body]'
+									id='{{ formId }}-body'
+									class='input-full{% if form.errors contains 'body' %} input--error{% endif %}'
 									{% if form.errors contains 'body' %}
-										aria-invalid="true" aria-describedby="{{ formId }}-body-error"
+										aria-invalid='true' aria-describedby='{{ formId }}-body-error'
 									{% endif -%}
 								>{{ form.body }}</textarea>
-								<span id="{{ formId }}-body-error" class="input-error-message">
+								<span id='{{ formId }}-body-error' class='input-error-message'>
 									{%- include 'icon-error' %}
 									{{ 'blogs.comments.message' | t }}
 									{{ form.errors.messages.body }}.</span
@@ -138,10 +138,10 @@
 						</div>
 
 						{% if blog.moderated? %}
-							<p class="fine-print">{{ 'blogs.comments.moderated' | t }}</p>
+							<p class='fine-print'>{{ 'blogs.comments.moderated' | t }}</p>
 						{% endif %}
 
-						<input type="submit" class="btn" value="{{ 'blogs.comments.post' | t }}">
+						<input type='submit' class='btn' value='{{ 'blogs.comments.post' | t }}'>
 					{% endform %}
 				</div>
 			</div>
@@ -149,14 +149,14 @@
 	</div>
 {% endif %}
 
-<div class="text-center return-link-wrapper page-width">
-	<a href="{{ blog.url }}" class="btn btn--secondary btn--has-icon-before return-link">
+<div class='text-center return-link-wrapper page-width'>
+	<a href='{{ blog.url }}' class='btn btn--secondary btn--has-icon-before return-link'>
 		{% include 'icon-arrow-left' %}
 		{{ 'blogs.article.back_to_blog' | t: title: blog.title }}
 	</a>
 </div>
 
-<script type="application/ld+json">
+<script type='application/ld+json'>
 	{
 		"@context": "http://schema.org",
 		"@type": "Article",

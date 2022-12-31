@@ -1,3 +1,5 @@
+@use 'sass:color';
+
 // Styles for Rich text editor content
 .rte {
 	line-height: 1.25;
@@ -43,10 +45,6 @@
 		color: #1976d2;
 		transition-duration: 0.3s;
 		transition-property: color;
-
-		&:hover {
-			color: darken(#1976d2, 15%);
-		}
 	}
 
 	em {

@@ -5,3 +5,5 @@ development:
   preview_url:
   ignore_files:
     - config/settings_data.json
+    - templates/*.json
+    - templates/customers/*.json

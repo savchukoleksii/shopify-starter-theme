@@ -5,11 +5,11 @@ module.exports = {
 	],
 	"src/styles/**/*.scss": [
 		"prettier --write",
-		"stylelint --fix --config ./.stylelintrc --syntax scss"
+		"stylelint --fix --config ./stylelint.config.js --custom-syntax postcss-scss"
 	],
 	"src/styles/**/*.sass": [
 		"prettier --write",
-		"stylelint --fix --config ./.stylelintrc --syntax sass"
+		"stylelint --fix --config ./stylelint.config.js --custom-syntax postcss-sass"
 	],
 	"src/icons/*.svg": [
 		"svgo --config=svgo.json",
