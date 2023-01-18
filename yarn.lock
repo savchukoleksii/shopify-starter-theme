@@ -1248,9 +1248,9 @@
   integrity sha512-a5Sab1C4/icpTZVzZc5Ghpz88yQtGOyNqYXcZgOssB2uuAr+wF/MvN6bgtW32q7HHrvBki+BsZ0OuNv6EV3K9g==
 
 "@savchukoleksii/builder@^1.0.15":
-  version "1.0.34"
-  resolved "https://registry.yarnpkg.com/@savchukoleksii/builder/-/builder-1.0.34.tgz#439def2d9818b9b62d282c664a3fdd6590575fb2"
-  integrity sha512-O/Y94WZWhvWIkuEq+od6b35ateI9es/ZbzYCV1/3QaD0BiNsGKsfXa7GlsnfOaeCqOGTQL2TuVADmkHeBjHIyw==
+  version "1.0.35"
+  resolved "https://registry.yarnpkg.com/@savchukoleksii/builder/-/builder-1.0.35.tgz#a6d167f94df55d9795adf63890a43aea14388b8f"
+  integrity sha512-O+J+lor/7pzwswPg2pi3RKbg3gr5DxjGs5ax47MB9Y3Vb1s4Gb9pEqIwxFdMbnKlIHwrmhcz9/SNR7TIepT9kQ==
   dependencies:
     "@babel/core" "^7.14.6"
     "@babel/preset-env" "^7.14.7"
