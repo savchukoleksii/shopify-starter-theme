@@ -1,7 +1,28 @@
+{%- capture money_format_output -%}
+	{%- if settings.currency_format == 'money_with_currency_format' -%}
+		{{- shop.money_with_currency_format | strip_html -}}
+	{%- else -%}
+		{{- shop.money_format | strip_html -}}
+	{%- endif -%}
+{%- endcapture -%}
+
+{%- assign body_classes = "" -%}
+{%- if template == '404' -%}
+	{%- assign body_classes = body_classes | append: " error-404" -%}
+{% else -%}
+	{%- capture template_class -%}
+		{{- template | replace: '.', '-' | handle | prepend: "template-" -}}
+	{%- endcapture -%}
+
+	{%- assign body_classes = template_class | append: " " | append: "template_class" -%}
+{%- endif -%}
+
 <!doctype html>
 <html class='no-js' lang='{{- shop.locale -}}'>
 	<head>
 		<meta charset='utf-8'>
+		<meta http-equiv="cleartype" content="on">
+		<meta name="robots" content="index,follow">
 		<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 		<meta name='viewport' content='width=device-width,initial-scale=1'>
 		<meta name='theme-color' content='{{- settings.color_button -}}'>
@@ -50,28 +71,27 @@
 			<meta name='description' content='{{- page_description | escape -}}'>
 		{%- endif -%}
 
-		{% include 'social-meta-tags' %}
-
-		{%- include 'variables.css' -%}
-
-		<link rel='stylesheet' href='{{ 'main.build.css' | asset_url }}'>
-
-		{%- if template.directory == 'customers' -%}
-			<script src='{{ 'shopify_common.js' | shopify_asset_url }}' defer='defer'></script>
-		{%- endif -%}
+		{%- render 'variables.css' -%}
+		{%- render 'builder-include-style' with path: 'main.css' -%}
 
 		{{ content_for_header }}
+
+		{%- if template.directory == 'customers' -%}
+			<script src="{{- 'shopify_common.js' | shopify_asset_url -}}" defer></script>
+			<script src="{{- 'customer_area.js' | shopify_asset_url -}}" defer></script>
+		{%- endif -%}
 	</head>
 
-	<body class='template-{{ template | split: '.' | first }}'>
-		{% section 'header' %}
+	<body
+		class="{{- body_classes -}}"
+		data-money-format="{{- money_format_output -}}"
+		data-shop-url="{{- shop.url -}}"
+		data-current-lang="{{- request.locale.iso_code -}}"
+	>
+		{%- section 'header' -%}
 
 		{{ content_for_layout }}
 
-		{%- if template.directory == 'customers' -%}
-			<script src='{{- 'shopify_common.js' | shopify_asset_url -}}' defer></script>
-		{%- endif -%}
-
-		<script src='{{- 'main.build.min.js' | asset_url -}}' defer></script>
+		{%- render 'builder-include-script' with path: 'main.js' -%}
 	</body>
 </html>

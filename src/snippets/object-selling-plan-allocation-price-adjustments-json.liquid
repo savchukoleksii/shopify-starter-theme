@@ -1,0 +1,9 @@
+{%- if price_adjustment != blank -%}
+	{
+		"price": {{- price_adjustment.price | json -}},
+		"order_count": {{- price_adjustment.order_count | json -}},
+		"value": {{- price_adjustment.value | json -}},
+		"value_type": {{- price_adjustment.value_type | json -}}
+	}
+{%- else -%}null{%- endif -%}
+

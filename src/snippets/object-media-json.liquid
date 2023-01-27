@@ -1,0 +1,9 @@
+{%- if media != blank -%}
+	{
+		"alt": {{- media.alt | json -}},
+		"id": {{- media.id | json -}},
+		"media_type": {{- media.media_type | json -}},
+		"position": {{- media.position | json -}},
+		"preview_image": {%- render 'object-image-json' with image: media.preview_image -%}
+	}
+{%- else -%}null{%- endif -%}

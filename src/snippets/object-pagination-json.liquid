@@ -1,0 +1,11 @@
+{%- if paginate != blank -%}
+	{
+		"items": {{- paginate.items | json -}},
+		"current_offset": {{- paginate.current_offset | json -}},
+		"current_page": {{- paginate.current_page | json -}},
+		"pages": {{- paginate.pages | json -}},
+		"per_page": {{- paginate.page_size | json -}},
+		"previous": {{- paginate.previous | json -}},
+		"next": {{- paginate.next | json -}}
+	}
+{%- else -%}null{%- endif -%}

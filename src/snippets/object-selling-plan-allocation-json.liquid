@@ -1,0 +1,24 @@
+{%- assign price_adjustments = "" -%}
+{%- for price_adjustment in selling_plan_allocation.price_adjustments -%}
+	{%- if price_adjustments != "" -%}
+		{%- assign price_adjustments = price_adjustments | append: "," -%}
+	{%- endif -%}
+
+	{%- capture price_adjustment_json -%}
+		{%- render 'object-selling-plan-allocation-price-adjustments-json' with price_adjustment: price_adjustment -%}
+	{%- endcapture -%}
+{%- endfor -%}
+
+{%- if selling_plan_allocation != blank -%}
+	{
+		"compare_at_price": {{- selling_plan_allocation.compare_at_price | json -}},
+		"per_delivery_price": {{- selling_plan_allocation.per_delivery_price | json -}},
+		"price": {{- selling_plan_allocation.price | json -}},
+		"price_adjustments": [
+			{{- price_adjustments -}}
+		],
+		"selling_plan": {{- selling_plan_allocation.selling_plan | json -}},
+		"selling_plan_group_id": {{- selling_plan_allocation.selling_plan_group_id | json -}},
+		"unit_price": {{- selling_plan_allocation.unit_price | json -}}
+	}
+{%- else -%}null{%- endif -%}

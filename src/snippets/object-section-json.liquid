@@ -1,0 +1,8 @@
+{%- if section != blank -%}
+	{
+		"id": {{- section.id | json -}},
+		"type": {{- type | json -}},
+		"settings": {{- section.settings | json -}},
+		"blocks": {{- section.blocks | json -}}
+	}
+{%- else -%}{}{%- endif -%}

@@ -1,0 +1,6 @@
+{%- layout none -%}
+{%- capture result -%}
+    {%- render 'object-collection-json' with collection: collection -%}
+{%- endcapture -%}
+
+<script data-json-response type="application/json">{{- result -}}</script>

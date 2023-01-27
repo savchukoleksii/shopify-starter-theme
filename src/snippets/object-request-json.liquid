@@ -1,0 +1,8 @@
+{%- if request != blank -%}
+	{
+		"design_mode": {{- request.design_mode | json -}},
+		"host ": {{- request.host | json -}},
+		"locale": {{- request.locale | json -}},
+		"path": {{- request.path | json -}}
+	}
+{%- else -%}null{%- endif -%}

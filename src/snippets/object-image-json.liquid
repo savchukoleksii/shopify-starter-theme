@@ -1,0 +1,13 @@
+{%- if image != blank -%}
+	{
+		"alt": {{- image.alt | json -}},
+		"aspect_ratio": {{- image.aspect_ratio | json -}},
+		"attached_to_variant": {{- image.attached_to_variant? | json -}},
+		"height": {{- image.height | json -}},
+		"id": {{- image.id | json -}},
+		"media_type": {{- image.media_type | json -}},
+		"position": {{- image.position | json -}},
+		"src": {{- image.src | img_url: 'master' | json -}},
+		"width": {{- image.width | json -}}
+	}
+{%- else -%}null{%- endif -%}

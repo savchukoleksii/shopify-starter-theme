@@ -1,0 +1,21 @@
+{%- layout none -%}
+{%- assign result = "" -%}
+{%- paginate search.results by 1000 -%}
+	{%- for item in search.results -%}
+		{%- if item.object_type != 'product' -%}
+			{%- continue -%}
+		{%- endif -%}
+
+		{%- if result != "" -%}
+			{%- assign result = result | append: "," -%}
+		{%- endif -%}
+
+		{%- capture result_item -%}
+			{%- include 'object-product-json' with product: item, include_recharge: true -%}
+		{%- endcapture -%}
+
+		{%- assign result = result | append: result_item -%}
+	{%- endfor -%}
+{%- endpaginate -%}
+
+<script data-json-response type="application/json">[{{- result -}}]</script>

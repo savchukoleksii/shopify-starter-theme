@@ -1,0 +1,38 @@
+{%- if collection != blank -%}
+	{%- assign products_json = "" -%}
+	{%- for product in collection.products -%}
+		{%- if products_json != "" -%}
+			{%- assign products_json = products_json | append: "," -%}
+		{%- endif -%}
+
+		{%- capture product_json -%}
+			{%- render 'object-product-json' with product: product -%}
+		{%- endcapture -%}
+
+		{%- assign products_json = products_json | append: product_json -%}
+	{%- endfor -%}
+
+	{
+		"all_products_count": {{- collection.all_products_count | json -}},
+		"all_tags": {{- collection.all_tags | json -}},
+		"all_types": {{- collection.all_types | json -}},
+		"all_vendors": {{- collection.all_vendors | json -}},
+		"current_type": {{- collection.current_type | json -}},
+		"current_vendor": {{- collection.current_vendor | json -}},
+		"description": {{- collection.description | json -}},
+		"featured_image": {{- collection.featured_image | json -}},
+		"filters": {{- collection.filters | json -}},
+		"handle": {{- collection.handle | json -}},
+		"id": {{- collection.id | json -}},
+		"image": {%- render 'object-image-json' with image: collection.featured_image -%},
+		"products": [{{- products_json -}}],
+		"products_count": {{- collection.products_count | json -}},
+		"published_at": "{{- collection.published_at -}}",
+		"sort_by": {{- collection.sort_by | json -}},
+		"sort_options": {{- collection.sort_options | json -}},
+		"tags": {{- collection.tags | json -}},
+		"template_suffix": {{- collection.template_suffix | json -}},
+		"title": {{- collection.title | json -}},
+		"url": {{- collection.url | json -}}
+	}
+{%- else -%}null{%- endif -%}
