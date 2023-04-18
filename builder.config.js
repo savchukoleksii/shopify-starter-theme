@@ -9,6 +9,7 @@ module.exports = {
 		return {
 			...config,
 			optimization: {
+				...config.optimization,
 				minimize: true,
 				minimizer: [
 					new TerserPlugin({
